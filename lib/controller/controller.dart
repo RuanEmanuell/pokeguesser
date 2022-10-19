@@ -12,6 +12,10 @@ class Controller extends ChangeNotifier {
 
   var name;
 
+  var counter = 0;
+
+  var rightCounter = 0;
+
   changeText1() async {
     text = "Now tell me, what's your name?";
     notifyListeners();
@@ -19,6 +23,16 @@ class Controller extends ChangeNotifier {
 
   changeText2() {
     text = "Nice, let's begin! When you are ready, press the start button.";
+    notifyListeners();
+  }
+
+  addCount() {
+    counter++;
+    notifyListeners();
+  }
+
+  addRight() {
+    rightCounter++;
     notifyListeners();
   }
 

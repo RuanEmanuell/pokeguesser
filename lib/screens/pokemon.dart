@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import "package:basic_utils/basic_utils.dart";
 
+import "end.dart";
+
 var data = Controller();
 
 class PokemonScreen extends StatefulWidget {
@@ -85,6 +87,7 @@ class _PokemonScreenState extends State<PokemonScreen> {
                           style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                           onPressed: () {
                             if (controller.text != "") {
+                              data.addCount();
                               showModalBottomSheet(
                                 isDismissible: false,
                                 context: context,
@@ -92,12 +95,12 @@ class _PokemonScreenState extends State<PokemonScreen> {
                                   return Container(
                                     child: Column(
                                       children: [
+                                        Text(data.counter.toString()),
                                         Container(
                                             height: screenHeight / 3,
                                             margin: EdgeInsets.only(
                                                 right: screenWidth / 6,
                                                 left: screenWidth / 6,
-                                                top: 25,
                                                 bottom: 25),
                                             decoration: BoxDecoration(
                                               color: wrong ? Colors.red : Colors.green,
@@ -123,11 +126,21 @@ class _PokemonScreenState extends State<PokemonScreen> {
                                                       backgroundColor:
                                                           wrong ? Colors.red : Colors.green),
                                                   onPressed: () {
-                                                    Navigator.push(context, MaterialPageRoute(
-                                                      builder: (context) {
-                                                        return PokemonScreen(name: widget.name);
-                                                      },
-                                                    ));
+                                                    if (data.counter < 3) {
+                                                      Navigator.push(context, MaterialPageRoute(
+                                                        builder: (context) {
+                                                          return PokemonScreen(name: widget.name);
+                                                        },
+                                                      ));
+                                                    } else {
+                                                      Navigator.push(context, MaterialPageRoute(
+                                                        builder: (context) {
+                                                          return EndScreen(
+                                                              name: widget.name,
+                                                              rightCounter: data.rightCounter);
+                                                        },
+                                                      ));
+                                                    }
                                                   },
                                                   child: Text("Next"))
                                             ],
@@ -139,8 +152,10 @@ class _PokemonScreenState extends State<PokemonScreen> {
                                 },
                               );
                             }
+
                             if (controller.text.toLowerCase() == data.pokemon["name"]) {
                               wrong = false;
+                              data.addRight();
                             } else {
                               wrong = true;
                             }
