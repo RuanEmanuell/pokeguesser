@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:alarme/controller/controller.dart';
 
+import "pokemon.dart";
+
 final data = Controller();
 
 class HomeScreen extends StatelessWidget {
@@ -32,17 +34,18 @@ class HomeScreen extends StatelessWidget {
                 Container(
                     width: screenWidth,
                     height: screenHeight / 2.25,
-                    margin: const EdgeInsets.only(left: 80),
+                    margin: const EdgeInsets.only(left: 110),
                     child: Image.asset("assets/images/oak.png")),
                 Container(
                     margin: const EdgeInsets.only(left: 10, top: 30),
-                    width: screenWidth / 2,
-                    height: screenHeight / 9,
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: Colors.black, width: 2)),
-                    child: Container(margin: const EdgeInsets.all(10), child: Text(data.text))),
+                    child: Container(
+                      width:screenWidth/2,
+                      margin: const EdgeInsets.all(10), child: Text(data.text)
+                      )),
                 Container(
                   margin: EdgeInsets.only(left: 20, right: 20, bottom: 30, top: screenWidth / 1.75),
                   child: TextField(
@@ -68,7 +71,16 @@ class HomeScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                     onPressed: () {
                       if (controller.text != "") {
+                        data.name=controller.text;
                         data.requestData();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:(context) {
+                              return PokemonScreen();
+                            },
+                          )
+                        );
                       }
                     },
                     child: const Text("Start", style: TextStyle(fontSize: 25))),

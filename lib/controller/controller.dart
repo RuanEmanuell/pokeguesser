@@ -9,21 +9,25 @@ class Controller extends ChangeNotifier {
 
   var text = "Hello there, welcome! I'm Oak. People call me the Pokémon Professor.";
 
-  void changeText1() async {
+  var name;
+
+
+  changeText1() async {
     text = "Now tell me, what's your name?";
     notifyListeners();
   }
 
-  void changeText2() {
+  changeText2() {
     text = "Nice, let's begin! When you are ready, press the start button.";
     notifyListeners();
   }
 
-  Future<void> requestData() async {
+  Future requestData() async {
     var response = await http.get(Uri.parse("https://pokeapi.co/api/v2/pokemon/132"));
     if (response.statusCode == 200) {
-      print(response.body);
       pokemon = jsonDecode(response.body);
+      print(pokemon); 
+      notifyListeners();
     } else {
       print("deu errado");
     }

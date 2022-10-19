@@ -5,18 +5,14 @@ import 'package:provider/provider.dart';
 import "screens/home.dart";
 
 void main() {
-  runApp(MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => Controller())], child: MyApp()));
+  runApp(ChangeNotifierProvider(create: (context) => Controller(), child: MaterialApp(
+        home:MyApp()
+      )));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: ChangeNotifierProvider(
-            create: (_) {
-              Controller();
-            },
-            child: HomeScreen()));
+    return HomeScreen();
   }
 }
