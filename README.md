@@ -1,6 +1,6 @@
 # pokeguesser
 
-A new Flutter project.
+Still under development.
 
 ## Getting Started
 

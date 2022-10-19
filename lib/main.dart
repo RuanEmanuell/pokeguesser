@@ -5,9 +5,8 @@ import 'package:provider/provider.dart';
 import "screens/home.dart";
 
 void main() {
-  runApp(ChangeNotifierProvider(create: (context) => Controller(), child: MaterialApp(
-        home:MyApp()
-      )));
+  runApp(
+      ChangeNotifierProvider(create: (context) => Controller(), child: MaterialApp(home: MyApp())));
 }
 
 class MyApp extends StatelessWidget {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -10,7 +11,6 @@ class Controller extends ChangeNotifier {
   var text = "Hello there, welcome! I'm Oak. People call me the Pokémon Professor.";
 
   var name;
-
 
   changeText1() async {
     text = "Now tell me, what's your name?";
@@ -23,10 +23,10 @@ class Controller extends ChangeNotifier {
   }
 
   Future requestData() async {
-    var response = await http.get(Uri.parse("https://pokeapi.co/api/v2/pokemon/132"));
+    var random = Random().nextInt(900);
+    var response = await http.get(Uri.parse("https://pokeapi.co/api/v2/pokemon/${random}"));
     if (response.statusCode == 200) {
       pokemon = jsonDecode(response.body);
-      print(pokemon); 
       notifyListeners();
     } else {
       print("deu errado");

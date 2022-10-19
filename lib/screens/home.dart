@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:alarme/controller/controller.dart';
+import "package:basic_utils/basic_utils.dart";
 
 import "pokemon.dart";
 
-final data = Controller();
+var data = Controller();
 
 class HomeScreen extends StatelessWidget {
   TextEditingController controller = TextEditingController();
@@ -43,9 +44,9 @@ class HomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: Colors.black, width: 2)),
                     child: Container(
-                      width:screenWidth/2,
-                      margin: const EdgeInsets.all(10), child: Text(data.text)
-                      )),
+                        width: screenWidth / 2,
+                        margin: const EdgeInsets.all(10),
+                        child: Text(data.text))),
                 Container(
                   margin: EdgeInsets.only(left: 20, right: 20, bottom: 30, top: screenWidth / 1.75),
                   child: TextField(
@@ -70,17 +71,14 @@ class HomeScreen extends StatelessWidget {
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                     onPressed: () {
-                      if (controller.text != "") {
-                        data.name=controller.text;
+                      if (controller.text.isNotEmpty) {
+                        data.name = StringUtils.capitalize(controller.text);
                         data.requestData();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder:(context) {
-                              return PokemonScreen();
-                            },
-                          )
-                        );
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return PokemonScreen(name: data.name);
+                          },
+                        ));
                       }
                     },
                     child: const Text("Start", style: TextStyle(fontSize: 25))),
