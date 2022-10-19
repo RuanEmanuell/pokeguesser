@@ -36,6 +36,11 @@ class Controller extends ChangeNotifier {
     notifyListeners();
   }
 
+  resetCounters() {
+    counter = 0;
+    rightCounter = 0;
+  }
+
   Future requestData() async {
     var random = Random().nextInt(900);
     var response = await http.get(Uri.parse("https://pokeapi.co/api/v2/pokemon/${random}"));

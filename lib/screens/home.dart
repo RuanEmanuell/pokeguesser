@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:alarme/controller/controller.dart';
 import "package:basic_utils/basic_utils.dart";
+import 'package:provider/provider.dart';
 
 import "pokemon.dart";
-
-var data = Controller();
 
 class HomeScreen extends StatelessWidget {
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var data = Provider.of<Controller>(context, listen: false);
+
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -35,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                 Container(
                     width: screenWidth,
                     height: screenHeight / 2.25,
-                    margin: const EdgeInsets.only(left: 110),
+                    margin: const EdgeInsets.only(left: 130),
                     child: Image.asset("assets/images/oak.png")),
                 Container(
                     margin: const EdgeInsets.only(left: 10, top: 30),
@@ -54,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                     onTap: () {
                       data.changeText1();
                     },
-                    onChanged: (value) {
+                    onSubmitted: (value) {
                       data.changeText2();
                     },
                     decoration: const InputDecoration(
@@ -72,11 +73,11 @@ class HomeScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                     onPressed: () {
                       if (controller.text.isNotEmpty) {
-                        data.name = StringUtils.capitalize(controller.text);
-                        data.requestData();
+                        Provider.of<Controller>(context, listen: false).name =
+                            StringUtils.capitalize(controller.text);
                         Navigator.push(context, MaterialPageRoute(
                           builder: (context) {
-                            return PokemonScreen(name: data.name);
+                            return PokemonScreen();
                           },
                         ));
                       }
