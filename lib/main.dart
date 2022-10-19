@@ -6,7 +6,8 @@ import "screens/home.dart";
 
 void main() {
   runApp(MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => Controller())], child: MyApp()));
+      providers: [ChangeNotifierProvider(create: (context) => Controller())],
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

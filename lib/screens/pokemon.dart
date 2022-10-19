@@ -40,13 +40,15 @@ class _PokemonScreenState extends State<PokemonScreen> {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        body: loading
-            ? Center(
+        body: loading ? Center(
                 child: SizedBox(
                     height: screenHeight / 6.5,
                     width: screenWidth / 4,
-                    child: const CircularProgressIndicator(color: Colors.red)))
-            : SingleChildScrollView(
+                    child: const CircularProgressIndicator(
+                      color: Colors.red,
+                      strokeWidth: 8,
+                    ))
+                ): SingleChildScrollView(
                 child: Consumer<Controller>(builder: (context, value, child) {
                   return Column(children: [
                     Container(
@@ -68,15 +70,22 @@ class _PokemonScreenState extends State<PokemonScreen> {
                     Container(
                       margin: EdgeInsets.only(left: 20, right: 20, bottom: 25, top: 25),
                       child: Text("Who is that Pokémon?",
-                          style: GoogleFonts.pressStart2p(textStyle: TextStyle(fontSize: 18))),
+                          style: GoogleFonts.pressStart2p(fontSize: 18)),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 50),
                       child: TextField(
-                        controller: controller,
-                        decoration: const InputDecoration(
-                            hintText: "Who is that Pokémon?", border: OutlineInputBorder()),
-                      ),
+                          controller: controller,
+                          decoration: InputDecoration(
+                            hintText: "Who is that Pokémon?",
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                              width: 2,
+                            )),
+                            border: OutlineInputBorder(),
+                          ),
+                          style: GoogleFonts.montserrat(
+                              fontWeight: FontWeight.bold, color: Colors.black)),
                     ),
                     SizedBox(
                         width: screenWidth / 3,
@@ -102,7 +111,8 @@ class _PokemonScreenState extends State<PokemonScreen> {
                                                   bottom: 25),
                                               decoration: BoxDecoration(
                                                 color: wrong ? Colors.red : Colors.green,
-                                                border: Border.all(color: Colors.black, width: 3),
+                                                border: Border.all(
+                                                    color: Colors.black, width: 3),
                                                 borderRadius: BorderRadius.circular(200),
                                               ),
                                               child: Container(
@@ -113,31 +123,41 @@ class _PokemonScreenState extends State<PokemonScreen> {
                                           Container(
                                             child: Column(
                                               children: [
-                                                Text(wrong ? wrongText : rightText),
-                                                Text("${data.pokemon["name"].toUpperCase()}!",
-                                                    style: TextStyle(
-                                                        color: wrong ? Colors.red : Colors.green,
+                                                Text(wrong ? wrongText : rightText,
+                                                    style: GoogleFonts.montserrat(
+                                                        fontWeight: FontWeight.bold)),
+                                                Text(
+                                                    "${data.pokemon["name"].toUpperCase()}!",
+                                                    style: GoogleFonts.montserrat(
+                                                        color: wrong
+                                                            ? Colors.red
+                                                            : Colors.green,
                                                         fontSize: 25)),
                                                 ElevatedButton(
                                                     style: ElevatedButton.styleFrom(
-                                                        backgroundColor:
-                                                            wrong ? Colors.red : Colors.green),
+                                                        backgroundColor: wrong
+                                                            ? Colors.red
+                                                            : Colors.green),
                                                     onPressed: () {
                                                       if (data.counter < 10) {
-                                                        Navigator.push(context, MaterialPageRoute(
+                                                        Navigator.push(context,
+                                                            MaterialPageRoute(
                                                           builder: (context) {
                                                             return PokemonScreen();
                                                           },
                                                         ));
                                                       } else {
-                                                        Navigator.push(context, MaterialPageRoute(
+                                                        Navigator.push(context,
+                                                            MaterialPageRoute(
                                                           builder: (context) {
                                                             return EndScreen();
                                                           },
                                                         ));
                                                       }
                                                     },
-                                                    child: Text("Next"))
+                                                    child: Text("Next",
+                                                        style: GoogleFonts.montserrat(
+                                                            fontWeight: FontWeight.bold)))
                                               ],
                                             ),
                                           ),
@@ -155,7 +175,9 @@ class _PokemonScreenState extends State<PokemonScreen> {
                                 wrong = true;
                               }
                             },
-                            child: Text("Guess", style: TextStyle(fontSize: 25))))
+                            child: Text("Guess",
+                                style: GoogleFonts.montserrat(
+                                    fontWeight: FontWeight.bold, fontSize: 25))))
                   ]);
                 }),
               ));
