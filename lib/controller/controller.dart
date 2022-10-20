@@ -30,9 +30,8 @@ class Controller extends ChangeNotifier {
   }
 
   Future requestData() async {
-    var random = Random().nextInt(900);
-    var response =
-        await http.get(Uri.parse("https://pokeapi.co/api/v2/pokemon/${random}"));
+    var random = Random().nextInt(905);
+    var response = await http.get(Uri.parse("https://pokeapi.co/api/v2/pokemon/$random"));
     if (response.statusCode == 200) {
       pokemon = jsonDecode(response.body);
       notifyListeners();

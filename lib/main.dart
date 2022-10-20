@@ -2,12 +2,11 @@ import 'package:alarme/controller/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import "screens/home.dart";
+import "screens/intro.dart";
 
 void main() {
   runApp(MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => Controller())],
-      child: MyApp()));
+      providers: [ChangeNotifierProvider(create: (context) => Controller())], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,6 +17,6 @@ class MyApp extends StatelessWidget {
             create: (_) {
               Controller();
             },
-            child: HomeScreen()));
+            child: IntroScreen()));
   }
 }

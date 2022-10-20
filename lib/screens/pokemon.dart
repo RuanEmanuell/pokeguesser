@@ -15,10 +15,11 @@ class _PokemonScreenState extends State<PokemonScreen> {
 
   var wrong = true;
 
+  @override
   void initState() {
     super.initState();
     Provider.of<Controller>(context, listen: false).requestData();
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         loading = false;
       });
@@ -31,52 +32,49 @@ class _PokemonScreenState extends State<PokemonScreen> {
   Widget build(BuildContext context) {
     var data = Provider.of<Controller>(context, listen: false);
 
-    var wrongText =
-        "You got it wrong, ${Provider.of<Controller>(context, listen: false).name}! This is";
-    var rightText =
-        "You are right, ${Provider.of<Controller>(context, listen: false).name}! This is";
+    var wrongText = "You got it wrong, ${Provider.of<Controller>(context, listen: false).name}! This is";
+    var rightText = "You are right, ${Provider.of<Controller>(context, listen: false).name}! This is";
 
-    var statusHeight = MediaQuery.of(context).viewPadding.top;
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        body: loading ? Center(
-                child: SizedBox(
-                    height: screenHeight / 6.5,
-                    width: screenWidth / 4,
-                    child: const CircularProgressIndicator(
-                      color: Colors.red,
-                      strokeWidth: 8,
-                    ))
-                ): SingleChildScrollView(
+        body: loading
+            ? const Center(
+                child: CircularProgressIndicator(
+                color: Colors.red,
+                strokeWidth: 5,
+              ))
+            : SingleChildScrollView(
                 child: Consumer<Controller>(builder: (context, value, child) {
                   return Column(children: [
                     Container(
                         margin: EdgeInsets.only(
                             right: screenWidth / 6,
                             left: screenWidth / 6,
-                            top: statusHeight + 25,
+                            top: screenHeight / 6,
                             bottom: 25),
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.black, width: 3),
                           borderRadius: BorderRadius.circular(200),
                         ),
                         child: Container(
-                            margin: EdgeInsets.all(30),
+                            margin: const EdgeInsets.all(30),
                             child: FadeInImage(
                                 image: NetworkImage(
                                     "${data.pokemon["sprites"]["other"]["official-artwork"]["front_default"]}"),
-                                placeholder: AssetImage("assets/images/pokeball.webp")))),
+                                placeholder: const AssetImage("assets/images/pokeball.webp")))),
                     Container(
-                      margin: EdgeInsets.only(left: 20, right: 20, bottom: 25, top: 25),
+                      margin: EdgeInsets.only(
+                          left: 20, right: 20, bottom: screenHeight / 30, top: screenHeight / 30),
                       child: Text("Who is that Pokémon?",
-                          style: GoogleFonts.pressStart2p(fontSize: 18)),
+                          style: GoogleFonts.pressStart2p(fontSize: 10.5 + screenWidth / 100)),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 50),
+                      margin: EdgeInsets.only(
+                          left: 20, right: 20, top: screenHeight / 30, bottom: screenHeight / 30),
                       child: TextField(
                           controller: controller,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: "Who is that Pokémon?",
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -84,12 +82,13 @@ class _PokemonScreenState extends State<PokemonScreen> {
                             )),
                             border: OutlineInputBorder(),
                           ),
-                          style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.bold, color: Colors.black)),
+                          style:
+                              GoogleFonts.montserrat(fontWeight: FontWeight.bold, color: Colors.black)),
                     ),
-                    SizedBox(
+                    Container(
                         width: screenWidth / 3,
                         height: screenHeight / 10,
+                        margin: EdgeInsets.only(top: screenHeight / 30),
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                             onPressed: () {
@@ -111,12 +110,11 @@ class _PokemonScreenState extends State<PokemonScreen> {
                                                   bottom: 25),
                                               decoration: BoxDecoration(
                                                 color: wrong ? Colors.red : Colors.green,
-                                                border: Border.all(
-                                                    color: Colors.black, width: 3),
+                                                border: Border.all(color: Colors.black, width: 3),
                                                 borderRadius: BorderRadius.circular(200),
                                               ),
                                               child: Container(
-                                                margin: EdgeInsets.all(20),
+                                                margin: const EdgeInsets.all(20),
                                                 child: Image.network(
                                                     "${data.pokemon["sprites"]["other"]["official-artwork"]["front_default"]}"),
                                               )),
@@ -126,29 +124,23 @@ class _PokemonScreenState extends State<PokemonScreen> {
                                                 Text(wrong ? wrongText : rightText,
                                                     style: GoogleFonts.montserrat(
                                                         fontWeight: FontWeight.bold)),
-                                                Text(
-                                                    "${data.pokemon["name"].toUpperCase()}!",
+                                                Text("${data.pokemon["name"].toUpperCase()}!",
                                                     style: GoogleFonts.montserrat(
-                                                        color: wrong
-                                                            ? Colors.red
-                                                            : Colors.green,
+                                                        color: wrong ? Colors.red : Colors.green,
                                                         fontSize: 25)),
                                                 ElevatedButton(
                                                     style: ElevatedButton.styleFrom(
-                                                        backgroundColor: wrong
-                                                            ? Colors.red
-                                                            : Colors.green),
+                                                        backgroundColor:
+                                                            wrong ? Colors.red : Colors.green),
                                                     onPressed: () {
                                                       if (data.counter < 10) {
-                                                        Navigator.push(context,
-                                                            MaterialPageRoute(
+                                                        Navigator.push(context, MaterialPageRoute(
                                                           builder: (context) {
                                                             return PokemonScreen();
                                                           },
                                                         ));
                                                       } else {
-                                                        Navigator.push(context,
-                                                            MaterialPageRoute(
+                                                        Navigator.push(context, MaterialPageRoute(
                                                           builder: (context) {
                                                             return EndScreen();
                                                           },
@@ -174,10 +166,12 @@ class _PokemonScreenState extends State<PokemonScreen> {
                               } else {
                                 wrong = true;
                               }
+
+                              print(data.counter);
                             },
                             child: Text("Guess",
                                 style: GoogleFonts.montserrat(
-                                    fontWeight: FontWeight.bold, fontSize: 25))))
+                                    fontWeight: FontWeight.bold, fontSize: 19 + screenWidth / 100))))
                   ]);
                 }),
               ));

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:alarme/controller/controller.dart';
-import "package:basic_utils/basic_utils.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   var buttonVisible = false;
 
+  @override
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 1), () {
@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
         visible1 = true;
       });
     });
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         visible2 = true;
       });
@@ -45,27 +45,27 @@ class _HomeScreenState extends State<HomeScreen> {
               duration: const Duration(seconds: 2),
               opacity: visible1 ? 1 : 0,
               child: Container(
-                  margin: const EdgeInsets.only(top: 50, bottom: 50),
-                  child: Text("Welcome!",
+                  margin: EdgeInsets.only(top: screenHeight / 7.5, bottom: screenHeight / 20),
+                  child: Text("Before we start,",
                       style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.bold, fontSize: 50)))),
+                          fontWeight: FontWeight.bold, fontSize: 30 + screenWidth / 100)))),
         ),
         Center(
           child: AnimatedOpacity(
               duration: const Duration(seconds: 2),
               opacity: visible2 ? 1 : 0,
               child: Container(
-                  margin: const EdgeInsets.only(top: 50),
+                  margin: EdgeInsets.only(top: screenHeight / 20, bottom: screenHeight / 20),
                   child: Text("What's your name?",
                       style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.bold, fontSize: 20)))),
+                          fontWeight: FontWeight.bold, fontSize: 16 + screenWidth / 100)))),
         ),
         Center(
             child: AnimatedOpacity(
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
           opacity: visible2 ? 1 : 0,
           child: Container(
-            margin: EdgeInsets.all(50),
+            margin: const EdgeInsets.all(50),
             child: TextField(
                 onSubmitted: (value) {
                   data.name = value;
@@ -73,22 +73,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     buttonVisible = true;
                   });
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                     width: 2,
                   )),
                   border: OutlineInputBorder(),
                 ),
-                style: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.bold, color: Colors.black)),
+                style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, color: Colors.black)),
           ),
         )),
+        Center(
+          child: AnimatedOpacity(
+              duration: const Duration(seconds: 2),
+              opacity: buttonVisible ? 1 : 0,
+              child: Container(
+                  margin: EdgeInsets.only(top: screenHeight / 20, bottom: screenHeight / 30),
+                  child: Text("Nice, are you ready?",
+                      style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.bold, fontSize: 16 + screenWidth / 100)))),
+        ),
         Container(
-          margin: EdgeInsets.all(50),
+          margin: EdgeInsets.only(left: 50, right: 50, top: screenHeight / 20),
           height: screenHeight / 10,
           child: AnimatedOpacity(
-            duration: Duration(seconds: 1),
+            duration: const Duration(seconds: 2),
             opacity: buttonVisible ? 1 : 0,
             child: ElevatedButton(
                 onPressed: () {
@@ -101,8 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 child: Text("Start",
-                    style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.bold, fontSize: 30))),
+                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 30))),
           ),
         )
       ]),
