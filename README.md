@@ -1,16 +1,18 @@
-# pokeguesser
+# Veja a versão em Português <a href="README-ptbr.md">aqui</a>
 
-Still under development.
+## Pokéguesser
 
-## Getting Started
+A game for guessing Pokémon, made in Flutter to deepen my knowdledge in using Provider instead of setState() to state management.
 
-This project is a starting point for a Flutter application.
+### How to Run
 
-A few resources to get you started if this is your first Flutter project:
+You will need <a href="https://docs.flutter.dev/get-started/install">Flutter</a>, after booting up on your emulator or device and <a href="https://docs.flutter.dev/get-started/codelab">starting a new Flutter project</a>, you will transfer the files of this repository folder of your Flutter project. 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Here are some images of the project running:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![pokeguesser1](https://user-images.githubusercontent.com/113607857/197057975-b559c466-4b9e-485c-86e9-3dc0391021f4.gif)
+![pokeguesser2](https://user-images.githubusercontent.com/113607857/197057982-5ad2f92e-5b62-4024-b824-a4f9430b002d.gif)
+
+### This project was made only for proposes of study!
+
+
