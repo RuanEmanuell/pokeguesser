@@ -5,7 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 import "pokemon.dart";
 
+//End Screen, it choose the color and message based on the player perfomance
+
 class EndScreen extends StatelessWidget {
+  const EndScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     var statusHeight = MediaQuery.of(context).viewPadding.top;
@@ -19,6 +23,7 @@ class EndScreen extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
+                  //Player's perfomance summary 
                   Text(data.rightCounter <= 5 ? "Too bad, ${data.name}..." : "Congrats ${data.name}!",
                       style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.bold,
@@ -29,6 +34,7 @@ class EndScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 19 + screenWidth / 120,
                           color: data.rightCounter <= 5 ? Colors.red : Colors.green)),
+                  //Oak and wanna try again text, respectively
                   Container(
                       margin: const EdgeInsets.all(10),
                       height: screenHeight / 2.5,
@@ -39,6 +45,7 @@ class EndScreen extends StatelessWidget {
                         style: GoogleFonts.montserrat(
                             fontSize: 25 + screenWidth / 100, fontWeight: FontWeight.bold)),
                   ),
+                  //Restart button
                   Container(
                     margin: EdgeInsets.only(top: screenHeight / 15),
                     height: screenHeight / 7,
@@ -52,7 +59,7 @@ class EndScreen extends StatelessWidget {
                           data.resetCounters();
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
-                              return PokemonScreen();
+                              return const PokemonScreen();
                             },
                           ));
                         }),

@@ -5,12 +5,17 @@ import 'package:provider/provider.dart';
 
 import "pokemon.dart";
 
+//Home Screen, the screen you are sended after the intro
+
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //Variables to handle animation
   var visible1 = false;
   var visible2 = false;
 
@@ -19,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    //Setting the timer to show the texts
     Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         visible1 = true;
@@ -38,8 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        body: Container(
+        body: SizedBox(
       child: ListView(children: [
+        //Two first texts and the TextField that appears first, respectively
         Center(
           child: AnimatedOpacity(
               duration: const Duration(seconds: 2),
@@ -83,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, color: Colors.black)),
           ),
         )),
+        //The last text and the start button, respectively
         Center(
           child: AnimatedOpacity(
               duration: const Duration(seconds: 2),

@@ -17,6 +17,6 @@ class MyApp extends StatelessWidget {
             create: (_) {
               Controller();
             },
-            child: IntroScreen()));
+            child: const IntroScreen()));
   }
 }

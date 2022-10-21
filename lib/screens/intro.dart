@@ -4,20 +4,25 @@ import "package:introduction_screen/introduction_screen.dart";
 
 import "home.dart";
 
+//This is the Intro Screen, it uses the Introduction Screen package
+
 class IntroScreen extends StatelessWidget {
+  const IntroScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         body: IntroductionScreen(
+            //Buttons
             next: const Text("Next"),
             done: const Text("Done"),
             onDone: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return HomeScreen();
+                return const HomeScreen();
               }));
             },
+        //The two pages of the intro
             pages: [
           PageViewModel(
               titleWidget: Text("Welcome to Pokéguesser!",

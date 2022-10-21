@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 class Controller extends ChangeNotifier {
   var pokemon;
 
-  var name;
+  late String name;
 
   var counter = 0;
 
@@ -36,7 +36,7 @@ class Controller extends ChangeNotifier {
       pokemon = jsonDecode(response.body);
       notifyListeners();
     } else {
-      print("deu errado");
+      debugPrint(response.statusCode.toString());
     }
   }
 }
